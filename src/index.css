@@ -558,6 +558,111 @@ button {
   animation: rise 0.9s ease 0.15s both;
 }
 
+/* Auth */
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  animation: rise 0.6s ease both;
+}
+
+.auth-brand {
+  font-size: clamp(2.8rem, 10vw, 3.8rem);
+  margin: 0 0 0.4rem;
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.auth-error {
+  margin: 0;
+  color: var(--danger, #8b3a2f);
+  font-size: 0.92rem;
+}
+
+.auth-switch {
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.account-chip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  justify-content: flex-end;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+.sync-pill {
+  opacity: 0.85;
+}
+
+/* History */
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.history-row {
+  display: grid;
+  grid-template-columns: 4.8rem 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.history-date {
+  display: grid;
+  line-height: 1.2;
+}
+
+.history-date strong {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+}
+
+.history-date span {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.history-bar-wrap {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(20, 36, 28, 0.1);
+  overflow: hidden;
+}
+
+.history-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--teal);
+  transition: width 0.25s ease;
+}
+
+.history-score {
+  font-size: 0.85rem;
+  font-weight: 550;
+  color: var(--teal-deep);
+  min-width: 2.4rem;
+  text-align: right;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
