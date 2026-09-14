@@ -254,16 +254,28 @@ app.get('/api/history', requireAuth, (req, res) => {
   res.json({ history: rows });
 });
 
-if (isProd) {
-  const dist = path.join(__dirname, '..', 'dist');
-  if (fs.existsSync(dist)) {
-    app.use(express.static(dist));
-    app.get('*', (_req, res) => {
-      res.sendFile(path.join(dist, 'index.html'));
-    });
-  }
+// Serve the built app from the same origin as the API (avoids /api 404s)
+const dist = path.join(__dirname, '..', 'dist');
+const serveStatic = process.env.SERVE_STATIC === '1' || isProd || fs.existsSync(dist);
+
+if (serveStatic && fs.existsSync(dist)) {
+  app.use(express.static(dist));
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      next();
+      return;
+    }
+    if (req.path.startsWith('/api')) {
+      res.status(404).json({ error: 'API route not found.' });
+      return;
+    }
+    res.sendFile(path.join(dist, 'index.html'));
+  });
 }
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`SEVEN API listening on http://127.0.0.1:${PORT}`);
+  if (serveStatic && fs.existsSync(dist)) {
+    console.log(`SEVEN app  listening on http://127.0.0.1:${PORT}`);
+  }
 });

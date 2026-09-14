@@ -30,10 +30,23 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const token = getToken();
   if (token) headers.set('Authorization', `Bearer ${token}`);
 
-  const res = await fetch(path, { ...init, headers });
+  let res: Response;
+  try {
+    res = await fetch(path, { ...init, headers });
+  } catch {
+    throw new Error('Cannot reach the SEVEN server. Run npm run start (or npm run dev) and open that same URL.');
+  }
+
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error((data as { error?: string }).error || `Request failed (${res.status})`);
+    const apiError = (data as { error?: string }).error;
+    if (apiError) throw new Error(apiError);
+    if (res.status === 404) {
+      throw new Error(
+        'API not found (404). Open the app from the server URL (http://localhost:3001), not a static preview.',
+      );
+    }
+    throw new Error(`Request failed (${res.status})`);
   }
   return data as T;
 }

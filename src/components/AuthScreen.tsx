@@ -47,7 +47,7 @@ export function AuthScreen({ onAuthed }: Props) {
               autoComplete="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="your name"
+              placeholder="username or email"
               required
               minLength={3}
             />
