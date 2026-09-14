@@ -1,6 +1,6 @@
 # SEVEN
 
-A daily habit manager for the seven things that actually work — with **login** and a **SQLite database** so you can track everyday progress.
+A daily habit manager for the seven things that actually work — with **login**, a **SQLite database**, **mobile layout**, and **installable PWA** support for phones.
 
 ## Features
 
@@ -11,7 +11,8 @@ A daily habit manager for the seven things that actually work — with **login**
 - Log your **one small hard thing**
 - Build **identity + trigger** cues
 - See **everyday progress history** from the database
-- Milestones for 2 weeks / 3 months / 1 year
+- **Mobile responsive** layout
+- **Install as an app** on Android / iPhone (Add to Home Screen)
 
 Progress is saved to SQLite on the server when you are logged in. A local cache keeps the UI fast.
 
@@ -25,7 +26,12 @@ npm run dev
 - App: http://localhost:5173  
 - API: http://localhost:3001  
 
-This starts both the Vite frontend and the Express + SQLite API.
+## Install on your phone
+
+1. Open the site in Chrome (Android) or Safari (iPhone)
+2. Use **Install** when prompted, or:
+   - **Android Chrome:** menu → Install app / Add to Home screen
+   - **iPhone Safari:** Share → Add to Home Screen
 
 ## Production
 

@@ -16,6 +16,7 @@ import { HabitList } from './components/HabitList';
 import { HardThing } from './components/HardThing';
 import { HistoryPanel } from './components/HistoryPanel';
 import { IdentityBuilder } from './components/IdentityBuilder';
+import { InstallPrompt } from './components/InstallPrompt';
 import { ProgressPanel } from './components/ProgressPanel';
 import { HABITS } from './data';
 import {
@@ -152,7 +153,12 @@ export default function App() {
   }
 
   if (!user || !state) {
-    return <AuthScreen onAuthed={onAuthed} />;
+    return (
+      <>
+        <InstallPrompt />
+        <AuthScreen onAuthed={onAuthed} />
+      </>
+    );
   }
 
   const day = getDay(state);
@@ -172,6 +178,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <InstallPrompt />
       <header className="hero">
         <div className="brand-row">
           <h1 className="brand">

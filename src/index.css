@@ -33,10 +33,13 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   color: var(--ink);
   font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.5;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
   background:
     radial-gradient(1200px 700px at 12% -10%, rgba(232, 184, 109, 0.28), transparent 55%),
     radial-gradient(900px 600px at 90% 8%, rgba(15, 92, 86, 0.16), transparent 50%),
@@ -186,6 +189,168 @@ button {
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile / PWA */
+.app {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 1.5rem));
+}
+
+@media (max-width: 640px) {
+  .app {
+    width: 100%;
+    padding-top: 1rem;
+  }
+
+  .brand {
+    font-size: clamp(2.8rem, 16vw, 3.6rem);
+  }
+
+  .brand-row {
+    align-items: flex-start;
+  }
+
+  .account-chip {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .progress-panel {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 0.9rem;
+    padding: 1rem;
+  }
+
+  .ring {
+    width: 68px;
+    height: 68px;
+    font-size: 1.2rem;
+  }
+
+  .section {
+    padding: 1rem 1rem 1.1rem;
+    border-radius: 14px;
+  }
+
+  .section h2 {
+    font-size: 1.35rem;
+  }
+
+  .habit {
+    grid-template-columns: auto 1fr;
+    gap: 0.7rem;
+    padding: 0.75rem 0.7rem;
+  }
+
+  .timer-display {
+    font-size: clamp(2.4rem, 14vw, 3.2rem);
+  }
+
+  .timer-actions,
+  .install-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 0.7rem 1rem;
+  }
+
+  .btn-sm {
+    min-height: 40px;
+  }
+
+  .field input,
+  .field textarea {
+    font-size: 16px; /* avoids iOS zoom on focus */
+    min-height: 44px;
+  }
+
+  .history-row {
+    grid-template-columns: 3.8rem 1fr auto;
+    gap: 0.5rem;
+  }
+
+  .history-date strong {
+    font-size: 0.9rem;
+  }
+
+  .milestone {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .auth-shell {
+    padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
+    align-items: start;
+  }
+
+  .auth-card {
+    margin-top: 8vh;
+  }
+}
+
+.install-banner {
+  position: sticky;
+  top: max(0.5rem, env(safe-area-inset-top));
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  animation: rise 0.45s ease both;
+}
+
+.install-copy {
+  flex: 1 1 12rem;
+}
+
+.install-copy strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 0.15rem;
+}
+
+.install-copy p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.install-copy em {
+  font-style: normal;
+  font-weight: 550;
+  color: var(--teal-deep);
+}
+
+.install-actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+@media (display-mode: standalone) {
+  .install-banner {
+    display: none;
+  }
+
+  .app {
+    padding-top: max(1rem, env(safe-area-inset-top));
   }
 }
 
