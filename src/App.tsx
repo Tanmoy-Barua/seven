@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import {
   fetchMe,
   fetchState,
+  getDataMode,
   getToken,
   logout,
   saveRemoteState,
@@ -167,14 +168,21 @@ export default function App() {
   const streak = streakDays(state);
   const activeDays = daysSinceStart(state);
   const todayLabel = format(new Date(), 'EEEE, MMMM d');
+  const dataMode = getDataMode();
   const syncLabel =
     syncStatus === 'saving'
-      ? 'Saving to database…'
+      ? dataMode === 'local'
+        ? 'Saving on this device…'
+        : 'Saving to database…'
       : syncStatus === 'saved'
-        ? 'Saved to database'
+        ? dataMode === 'local'
+          ? 'Saved on this device'
+          : 'Saved to database'
         : syncStatus === 'error'
-          ? 'Couldn’t save — is the server running?'
-          : 'Ready';
+          ? 'Couldn’t save — try again'
+          : dataMode === 'local'
+            ? 'Device database ready'
+            : 'Ready';
 
   return (
     <div className="app">
@@ -258,7 +266,9 @@ export default function App() {
       </div>
 
       <p className="footer-note">
-        Progress is stored in SQLite when you log in. Local cache keeps the UI snappy.
+        {dataMode === 'local'
+          ? 'Progress is saved in this browser’s local database (works on Vercel and installed app).'
+          : 'Progress is stored in SQLite on the server. Local cache keeps the UI snappy.'}
       </p>
     </div>
   );

@@ -37,7 +37,8 @@ export function AuthScreen({ onAuthed }: Props) {
           SEV<span>EN</span>
         </h1>
         <p className="section-lead">
-          Log in so every day’s progress is saved to your database — not just this browser.
+          Create an account to track every day. On Vercel it saves in this device’s secure browser
+          database; with the full server it saves to SQLite in the cloud.
         </p>
         <form className="auth-form" onSubmit={submit}>
           <div className="field">
